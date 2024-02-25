@@ -1,33 +1,35 @@
 import Header from "./components/Header"
-import WayToTeach from "./components/WaysToTeach"
-import Button from "./components/Button/Button"
-import { ways } from "./data" 
+import TeachingSection from "./components/TeachingSection" 
+import DefferencesSection from "./components/defferencesSection"
+import IntroSection from "./components/IntroSection"
+import TabsSection from './components/TabsSection'
+import { useState } from "react"
+import FeedbackSection from "./components/FeedbackSection"
 
 
 export default function App() {
+  const [tab, setTab] = useState('main')
+
   return (
-    <div>
+    <>
       <Header />
       <main>
-        <section>
-          <h3>Наш подход к обучению</h3>
+      <IntroSection />
+      <TabsSection  active={tab} onChange={(current) => setTab(current)} />
 
-          <ul>
-            <WayToTeach {...ways[0]}/>
-            <WayToTeach {...ways[1]}/>
-            <WayToTeach {...ways[2]}/>
-            <WayToTeach {...ways[3]}/>
-          </ul>
-        </section>
-        <section>
-          <h3>Чем мы отличаемся от других</h3>
-          
-          <Button>Подход</Button>
-          <Button>Доступность</Button>
-          <Button>Концентрация</Button>
-        </section>
+      {tab == 'main' && (
+        <>
+        <TeachingSection />
+        <DefferencesSection />
+        </>
+      )}
+
+      {tab == 'feedback' && <FeedbackSection />}
+
+      
+        
       </main>
-    </div>
+    </>
   )
 }
 
